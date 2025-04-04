@@ -6,6 +6,7 @@ const TypeWriter = ({
   speed = 100,
   fontSize = "40px",
   fontWeight = "normal",
+  textColor = "text-gray-200"
 }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [index, setIndex] = useState(0);
@@ -27,7 +28,7 @@ const TypeWriter = ({
 
   return (
     <motion.div
-      className="flex opacity-60"
+      className="flex  opacity-60"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -38,7 +39,7 @@ const TypeWriter = ({
       }}
     >
       <motion.div
-        className="flex opacity-70 text-gray-200"
+        className={`flex opacity-70 ${textColor}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}

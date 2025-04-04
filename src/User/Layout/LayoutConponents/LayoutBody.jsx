@@ -4,10 +4,20 @@ import { Outlet } from "react-router-dom";
 import LayoutFooter from "./LayoutFooter";
 
 const LayoutBody = () => {
+ 
   return (
     <>
       <Layout>
-        <Content className="h-[100vh] w-[100vw] flex justify-center items-start  bg-gray-900 text-gray-200">
+        <Content
+         style={{
+          // backgroundImage: `
+          //   linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+          //   linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
+            
+          // `,
+          backgroundSize: '40px 40px',
+        }}
+        className="h-[100vh] relative bg-white">
             {/* Contents outlet */}
           <Outlet />
           {/* Footer */}

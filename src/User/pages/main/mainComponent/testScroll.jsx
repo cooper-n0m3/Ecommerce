@@ -2,10 +2,11 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger, ScrollSmoother } from "gsap-trial/all";
 import ScrollGridV2 from "./testScrollGrid";
-
+import NavbarComponent from "../../../../Admin/components/header/Navbar";
+import ModalDialog2 from './ModalDialog2'
 const ScrollGrid = () => {
-  const boxRef = useRef(null);
   const wrapperBox = useRef(null);
+  const boxRef = useRef(null);
   gsap.registerPlugin(ScrollTrigger);
   gsap.config({ trialWarn: false });
   useEffect(() => {
@@ -15,7 +16,7 @@ const ScrollGrid = () => {
         start: "top center", // When top of `.box` hits center of viewport
         // end: "bottom bottom", // When bottom of `.box` hits top of viewport
         toggleActions: "play none none reverse",
-        markers: true,
+        markers: false,
         onEnter: () => {
           gsap.to(boxRef.current, { opacity: 1, duration: 1 });
         },
@@ -36,7 +37,8 @@ const ScrollGrid = () => {
   }, []);
 
   return (
-    <>
+    <div className="w-full flex flex-col justify-center">
+    <NavbarComponent/>
     <ScrollGridV2/>
       {/* <div
         id="smooth-wraper"
@@ -53,7 +55,7 @@ const ScrollGrid = () => {
         <div className="box box-c h-[100px] w-[100px] bg-blue-600"></div>
         <div className="box box-b h-[100px] w-[100px] bg-red-400"></div>
       </div> */}
-    </>
+    </div>
   );
 };
 

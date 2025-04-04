@@ -1,18 +1,16 @@
 import React, { useEffect } from "react";
 import { Pagination } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { setPage } from "../../../../redux/features/products/productActions";
-const PagePagination = ({product}) => {
+import { setPage } from "../../../../redux/features/store/storeActions";
+const PagePagination = ({ bookings, className = "" }) => {
   const dispatch = useDispatch();
-  const { currentPage,itemsPerPage, } = useSelector(
-    (state) => state.product
-  );
-  useEffect(()=>{
-    dispatch(setPage(1))
-  },[product])
+  const { currentPage, itemsPerPage } = useSelector((state) => state.store);
+  useEffect(() => {
+    dispatch(setPage(1));
+  }, [bookings, dispatch]);
 
   const handlePageChange = (page) => {
-      dispatch(setPage(page));
+    dispatch(setPage(page));
   };
   return (
     <>
@@ -21,9 +19,9 @@ const PagePagination = ({product}) => {
         simple={{
           readOnly: true,
         }}
-        className="bg-gray-600 text-gray-300 border border-gray-400 rounded"
+        className={`bg-gray-600 w-32 text-gray-300 border border-gray-400 rounded ${className}`}
         defaultCurrent={currentPage}
-        total={Math.ceil(product.length / itemsPerPage) * 10}
+        total={Math.ceil(bookings?.length / itemsPerPage) * 10}
         showSizeChanger={false}
       />
     </>

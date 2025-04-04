@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
+import FrmBookings from '../../booking/component/FrmBookings'
 const ModalDialog2 = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -19,13 +19,13 @@ const ModalDialog2 = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative bg-black flex justify-center">
       {/* Button to open modal */}
       <button
         onClick={() => setIsOpen(true)}
         className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
       >
-        Open Modal
+        Booking
       </button>
 
       {/* AnimatePresence ensures smooth entry/exit animations */}
@@ -44,7 +44,7 @@ const ModalDialog2 = () => {
 
             {/* Modal */}
             <motion.div
-              className="fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-md"
+              className="fixed z-50 top-1/4  transform -translate-x-1/2 translate-y-1/2 bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-md"
               variants={modalVariants}
               initial="hidden"
               animate="visible"
@@ -55,10 +55,8 @@ const ModalDialog2 = () => {
               }}
               style={{ perspective: "100px" }} // Adds depth for the 3D flip effect
             >
-              <h2 className="text-2xl font-bold mb-4">Half-Flip Modal</h2>
-              <p className="text-gray-600 mb-6">
-                This is a modal with a half-flip animation using Framer Motion.
-              </p>
+              <h2 className="text-2xl font-bold mb-4">Bookie Booking</h2>
+              <FrmBookings/>
               <div className="flex justify-end">
                 <button
                   onClick={() => setIsOpen(false)}

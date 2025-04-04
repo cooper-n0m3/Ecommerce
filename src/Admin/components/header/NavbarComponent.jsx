@@ -1,47 +1,46 @@
-import React from "react";
-import { Dropdown } from "flowbite-react";
+import React, { useEffect, useState } from "react";
+import { Avatar, Badge, Button, Dropdown, Space, Switch } from "antd";
+const uploadFolder_url = import.meta.env.VITE_API_GET_URL;
 const NavbarComponent = () => {
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    setUser({
+      userName: sessionStorage.getItem("user-name"),
+      userRole: sessionStorage.getItem("user-role"),
+      userAvatar: sessionStorage.getItem("user-avatar"),
+      userStatus: sessionStorage.getItem("user-status"),
+    });
+  }, []);
+
   return (
     <>
-      <nav className="header-container fixed top-0 px-2 z-50 w-full   bg-gray-800 dark:border-gray-700">
+      <nav className="bg-gray-600/20 border-b border-gray-600 border-opacity-50 backdrop-blur-sm fixed top-0 px-2 z-50 w-full    ">
         {/* Header Container */}
-        <div className="max-w-screen-xl  flex flex-wrap items-center justify-between mx-auto p-4">
+        <div className="max-w-screen-xl h-[10vh] flex flex-wrap items-center justify-end mx-auto p-4">
           {/* Brand Container */}
-          <a
-            href="https://flowbite.com/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
-            <img
-              src="https://flowbite.com/docs/images/logo.svg"
-              className="h-8"
-              alt="Flowbite Logo"
-            />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
-              Flowbite
-            </span>
-          </a>
+
           {/* End Brand Container */}
 
           {/* Avatar container */}
           <div className="flex  items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <button
-              type="button"
-              className="flex border text-sm bg-gray-800 rounded-full md:me-0 "
-              // id="user-menu-button"
-              // aria-expanded="false"
-              // data-dropdown-toggle="user-dropdown"
-              // data-dropdown-placement="bottom"
-            >
-              <span className="sr-only">Open user menu</span>
-              <img
-                className="w-8 h-8 rounded-full"
-                src="https://marketplace.canva.com/EAFvDRwEHHg/1/0/1600w/canva-colorful-abstract-online-shop-free-logo-cpI8ixEpis8.jpg"
-                alt="user photo"
-              />
-            </button>
+            <Space direction="vertical">
+              <Space size="middle" className="">
+                <Badge color="green" dot={user.userStatus} className="">
+                  <Avatar
+                    shape="circle"
+                    src={uploadFolder_url + user.userAvatar}
+                    size="default"
+                  />
+                </Badge>
+                <span className="self-center text-xs font-semibold whitespace-nowrap text-white">
+                  {user?.userName}
+                </span>
+              </Space>
+            </Space>
           </div>
           {/* End Avatar container */}
         </div>
+        
         {/*End Header Container */}
       </nav>
     </>

@@ -1,3 +1,4 @@
+import {hashParam} from '../../../../src/Admin/components/common/password/passwordGenerator.js'
 export const OrderList = [
     {
       orderId: '125ff3',
@@ -165,22 +166,27 @@ export const sortOrder=[
     {   
         id:1,
         title:'all',
-        url:'/admin/list-order'
+        url:'/admin/list-booking/all'
     },
     {
         id:2,
-        title:'paid',
-        url:'/admin/list-order/paid'
+        title:'confirmed',
+        url:'/admin/list-booking/confirmed'
     },
     {   
         id:3,
         title:'pending',
-        url:'/admin/list-order/pending'
+        url:'/admin/list-booking/pending'
     },
     {
         id:4,
+        title:'expired',
+        url:'/admin/list-booking/expired'
+    },
+    {
+        id:5,
         title:'cancelled',
-        url:'/admin/list-order/cancelled'
+        url:'/admin/list-booking/cancelled'
     },
 ]
 
@@ -207,38 +213,50 @@ export const sortApprove=[
 export const sortCompleteProduct=[
     {   
         id:1,
-        title:'all',
-        sort:'all',
-        url:'/admin/product'
+        title:'Total',
+        sort:'total',
+        url:'/admin/view-room/total'
     },
     {
         id:2,
-        title:'*active',
-        sort:'active',
-        url:'/admin/product/active'
+        title:'Available',
+        sort:'available',
+        url:'/admin/view-room/available'
     },
     {  
         id:3,
-        title:'*inactive',
-        sort:'inactive',
-        url:'/admin/product/inactive'
+        title:'Occupied',
+        sort:'occupied',
+        url:'/admin/view-room/occupied'
+    },
+    {  
+        id:4,
+        title:'Maintenance',
+        sort:'maintenance',
+        url:'/admin/view-room/maintenance'
+    },
+    {  
+        id:5,
+        title:'Closed',
+        sort:'closed',
+        url:'/admin/view-room/closed'
     },
 ]
 export const sortCategory=[
     {   
         id:1,
         title:'all',
-        url:'/admin/view-category?sort=all'
+        url:'/admin/view-hotel/all'
     },
     {
         id:2,
         title:'active',
-        url:'/admin/view-category?sort=active'
+        url:'/admin/view-hotel/active'
     },
     {   
         id:3,
         title:'inactive',
-        url:'/admin/view-category?sort=inactive'
+        url:'/admin/view-hotel/inactive'
     },
 ]
 

@@ -1,54 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DateSinglePicker from "../../components/common/datePicker/DatePicker";
 import numeral from "numeral";
-import { OrderBox } from "../../../redux/features/ecommerceTracking/BoxOrder";
+import BoxOrder from "./components/BoxOrder";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
 import { sortOrder } from "../../../redux/features/ecommerceTracking/OrderListTable";
+import { useDispatch } from "react-redux";
 
 const ListOrder = () => {
   const locationRouter = useLocation().pathname;
-  
-  const boxOrder = OrderBox;
   return (
     <>
     
       <div className="text-2xl py-3 fira-sans-medium-italic text-gray-100 opacity-80">
         <p className="ml-5 text-gray-600">
-          Order/<font className="text-gray-200">Activies</font>
+          Booking/<font className="text-gray-200">Activies</font>
         </p>
       </div>
       <div className="text-2xl py-3 fira-sans-medium-italic">
-        <DateSinglePicker />
+        {/* <DateSinglePicker /> */}
       </div>
       <div className="dashboard-blog-card h-24 border border-gray-500 border-opacity-50 flex  px-4 py-4 items-center gap-3 justify-center mb-4 rounded-lg bg-gray-800">
-        {boxOrder.map((item, index) => (
-          <button
-            key={index}
-            className={`!font-sans  cursor-default !normal-case w-1/4 p-2 border border-gray-400 border-opacity-50 opacity-90 transition hover:scale-105 h-full rounded-lg flex justify-center items-center`}
-          >
-            <div
-              className="card-icon !shadow !bg-gray-700 border border-opacity-70 text-xl w-1/5 rounded-full aspect-square  flex items-center justify-center"
-              style={{ border: `1px solid gray` ,}}
-            >
-              {item.svg}
-            </div>
-            <div className="card-infor  text-white w-4/5 h-full  flex flex-col items-center justify-center">
-              <small>{item.title}</small>
-              <div className="text-white">
-                <font className="text-xl ">
-                  {numeral(item.qty).format("0.a")}
-                </font>
-                <small className="text-xs  opacity-80">
-                  {" "}
-                  {item.title === "Total Orders"
-                    ? ``
-                    : `products in ${item.in}`}
-                </small>
-              </div>
-            </div>
-          </button>
-        ))}
+        <BoxOrder/>
       </div>
       <div className="border border-gray-500 flex px-1 py-[3px] items-center gap-3 justify-evenly mb-4 rounded-lg bg-gray-800">
         <div className="sort-group w-1/2 flex gap-1 justify-start h-full items-center">

@@ -5,42 +5,70 @@ import "./index.css";
 import LayoutComponent from "./Admin/components/Layouts/LayoutComponent.jsx";
 import Dashboard from "./Admin/pages/dashboard/DashboardLayout.jsx";
 import ProductAnalytics from "./Admin/pages/dashboard/ProductAnalytics.jsx";
-import AreaChartCard from "./Admin/components/common/charts/SaleChart.jsx";
 import SaleAnalytics from "./Admin/pages/dashboard/components/SaleAnalytics.jsx";
 import Visitor from "./Admin/pages/dashboard/components/VisitorAnalysis.jsx";
 import ListAllComponent from "./Admin/pages/order/components/ListAllComponent.jsx";
-import ListOrder from "./Admin/pages/order/Order.jsx";
 import { Provider } from "react-redux";
-import ProductComponent from "./Admin/pages/product/Product.jsx";
-import PostProduct from "./Admin/pages/product/components/ProductPost.jsx";
-import ViewProduct from "./Admin/pages/product/components/ProductView.jsx";
+import Room from "./Admin/pages/roomPage/RoomMain.jsx";
+import RoomPost from "./Admin/pages/roomPage/components/Room-Post.jsx";
+import RoomView from "./Admin/pages/roomPage/components/Room-View.jsx";
 import AuthLayout from "./Admin/pages/auth/AuthLayout.jsx";
-import { SignIn } from "./Admin/pages/auth/Signin.jsx";
-import Signup from "./Admin/pages/auth/Signup.jsx";
+import { Login } from "./Admin/pages/auth/Login.jsx";
 import ProtectedRoute from "./Admin/pages/auth/ProtectRoutes.jsx";
-import ApproveProduct from "./Admin/pages/product/components/approveProduct/ApproveProduct.jsx";
 import store from "./redux/store.js";
-import Draft from "./Admin/pages/product-draft/draft-Components/DraftProduct.jsx";
-import Category from "./Admin/pages/category/Category.jsx";
-import AddCategory from "./Admin/pages/category/components/Category-Add.jsx";
-import CategoryView from "./Admin/pages/category/components/Category-View.jsx";
-import DraftEditor from "./Admin/pages/product-draft/draft-Components/DraftEditor.jsx";
+import HotelPost from "./Admin/pages/hotelPage/components/Hotel-Add.jsx";
+import HotelView from "./Admin/pages/hotelPage/components/Hotel-View.jsx";
 import UserMainLayout from "./User/Layout/UserMainLayout.jsx";
 import MainHomePage from "./User/pages/main/MainHomePage.jsx";
 import ScrollGrid from "./User/pages/main/mainComponent/testScroll.jsx";
+import BookingView from "./Admin/pages/booking/Booking-View.jsx";
+import Register from "./Admin/pages/auth/Register.jsx";
+import BookingTableList from "./Admin/pages/booking/components/Booking-Component.jsx";
+import MainHotel from "./Admin/pages/hotelPage/HotelMain.jsx";
+import MainBooking from "./User/pages/booking/MainBooking.jsx";
+import HotelRoomCard from './User/pages/main/mainComponent/HotelList.jsx'
+import MainHotelPage from "./User/pages/hotels/MainHotelPage.jsx";
+import ModalSharedLayout from "./User/pages/desctination/ModalSharedLayout.jsx";
+import TabComponent from "./User/pages/myBookings/MainMyBooking.jsx";
+import ContactMain from "./User/pages/contact/ContactMain.jsx";
 // import { store } from "./redux/store.js";
 
 const router = createBrowserRouter([
   {
+    element: <UserMainLayout />,
+    children: [
+      {
+        path: "/",
+        element: <MainHomePage />,
+      },
+      {
+        path: "/hotels",
+        element: <MainHotelPage/>
+      },
+      {
+        path: "/my-bookings",
+        element: <TabComponent/>
+      },
+      {
+        path: "/destinations",
+        element: <ModalSharedLayout/>
+      },
+      {
+        path: "/contact",
+        element: <ContactMain/>
+      },
+    ],
+  },
+  {
     element: <AuthLayout />,
     children: [
       {
-        path: "/auth/signin",
-        element: <SignIn />,
+        path: "/auth/login",
+        element: <Login />,
       },
       {
-        path: "/auth/signup",
-        element: <Signup />,
+        path: "/auth/register",
+        element: <Register />,
       },
     ],
   },
@@ -60,65 +88,37 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        element: <ListOrder />,
+        element: <BookingView />,
         children: [
           {
-            path: "/admin/list-order",
-            element: <ListAllComponent />,
-          },
-          {
-            path: "/admin/list-order/paid",
-            element: <ListAllComponent />,
-          },
-          {
-            path: "/admin/list-order/pending",
-            element: <ListAllComponent />,
-          },
-          {
-            path: "/admin/list-order/cancelled",
-            element: <ListAllComponent />,
+            path: "/admin/list-booking/:status",
+            element: <BookingTableList />,
           },
         ],
       },
       {
-        element: <ProductComponent />,
+        element: <Room />,
         children: [
           {
-            path: "/admin/post-product",
-            element: <PostProduct />,
+            path: "/admin/post-room",
+            element: <RoomPost />,
           },
           {
-            path: "/admin/view-product",
-            element: <ViewProduct />,
-          },
-          {
-            path: "/admin/draft",
-            element: <Draft />,
+            path: "/admin/view-room/:status",
+            element: <RoomView />,
           },
         ],
       },
       {
-        element: <Category />,
+        element: <MainHotel />,
         children: [
           {
-            path: "/admin/add-category",
-            element: <AddCategory />,
+            path: "/admin/post-hotel",
+            element: <HotelPost />,
           },
           {
-            path: "/admin/view-category",
-            element: <CategoryView />,
-          },
-          {
-            path: "/admin/approve-product",
-            element: <ApproveProduct />,
-          },
-          {
-            path: "/admin/draft",
-            element: <Draft />,
-          },
-          {
-            path: "/admin/draft-edit",
-            element: <DraftEditor />,
+            path: "/admin/view-hotel/:status?",
+            element: <HotelView />,
           },
         ],
       },
@@ -137,21 +137,15 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
-    
-    element: <UserMainLayout />,
-    children:[
-      {
-        path:'/home',
-        element:<MainHomePage/>
-      },
-      
-    ]
+    path: "/test",
+    element: <ScrollGrid />,
   },
   {
-    path:'/test',
-    element:  <ScrollGrid/>
-  }
+    path: "/not-found",
+    element: <ScrollGrid />,
+  },
 ]);
 createRoot(document.getElementById("root")).render(
   <StrictMode>

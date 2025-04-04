@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
 import AdminProfile from "./components/AdminProfile";
 import { motion } from "motion/react";
+import { hashParam } from "../../components/common/password/passwordGenerator.js";
 
 const AsideComponent = () => {
   const location = useLocation().pathname;
@@ -36,14 +37,20 @@ const AsideComponent = () => {
       action: false,
     },
   ]);
-  const [orderBlog, setOrderBlog] = useState([
+  const [bookingBlog, setBookingBlog] = useState([
     {
       id: 1,
-      title: "Order",
+      title: "Booking",
       sub: [
         {
-          title: "Order List",
-          to: "/admin/list-order",
+          title: "View-Booking",
+          to: [
+            "/admin/list-booking/all",
+            "/admin/list-booking/confirmed",
+            "/admin/list-booking/pending",
+            "/admin/list-booking/cancelled",
+            "/admin/list-booking/expired",
+          ],
         },
       ],
       svg: (
@@ -66,22 +73,29 @@ const AsideComponent = () => {
       action: false,
     },
   ]);
-  const [product, setProductBlog] = useState([
+  const [Room, setRoom] = useState([
     {
       id: 1,
-      title: "Management",
+      title: "Room",
       sub: [
         {
-          title: "Add-Product",
-          to: "/admin/post-product",
+          title: "Add-Room",
+          to: ["/admin/post-room"],
         },
         {
-          title: "View-Product",
-          to: "/admin/view-product",
-        },
-        {
-          title: "Draft-Product",
-          to: "/admin/draft",
+          title: "View-Room",
+          to: [
+            "/admin/view-room/total",
+            "/admin/view-room/available",
+            "/admin/view-room/occupied",
+            "/admin/view-room/maintenance",
+            "/admin/view-room/closed",
+            "/admin/view-room/booked",
+            "/admin/view-room/pending",
+            "/admin/view-room/checked-in",
+            "/admin/view-room/checked-out",
+            "/admin/view-room/no-show",
+          ],
         },
       ],
       svg: (
@@ -89,17 +103,45 @@ const AsideComponent = () => {
           className="w-6 h-6 text-gray-400"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
-          width={24}
-          height={24}
+          width="24"
+          height="24"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M2.535 11A3.981 3.981 0 0 0 2 13v4a1 1 0 0 0 1 1h2v1a1 1 0 1 0 2 0v-1h10v1a1 1 0 1 0 2 0v-1h2a1 1 0 0 0 1-1v-4c0-.729-.195-1.412-.535-2H2.535ZM20 9V8a4 4 0 0 0-4-4h-3v5h7Zm-9-5H8a4 4 0 0 0-4 4v1h7V4Z" />
+        </svg>
+      ),
+      action: false,
+    },
+  ]);
+  const [Hotel, setHotel] = useState([
+    {
+      id: 1,
+      title: "Hotel",
+      sub: [
+        {
+          title: "Add-Hotel",
+          to: "/admin/post-hotel",
+        },
+        {
+          title: "View-Hotel",
+          to: "/admin/view-hotel/",
+        },
+      ],
+      svg: (
+        <svg
+          className="w-6 h-6 text-gray-400"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
           fill="currentColor"
           viewBox="0 0 24 24"
         >
           <path
-            fillRule="evenodd"
-            d="M20 10H4v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8ZM9 13v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1Z"
             clipRule="evenodd"
+            d="M4 4a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2v14a1 1 0 1 1 0 2H5a1 1 0 1 1 0-2V5a1 1 0 0 1-1-1Zm5 2a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-1Zm-5 4a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1h-1Zm-3 4a2 2 0 0 0-2 2v3h2v-3h2v3h2v-3a2 2 0 0 0-2-2h-2Z"
           />
-          <path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2Z" />
         </svg>
       ),
       action: false,
@@ -149,13 +191,13 @@ const AsideComponent = () => {
     <>
       <aside
         id="logo-sidebar"
-        className="fixed  Hide-Scrollbar px-2 bg-gray-900 top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full border-r border-gray-200 border-opacity-55 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        className="fixed Hide-Scrollbar px-2 bg-gray-900/20 backdrop-blur-sm top-0 left-0 z-40 w-64 h-[100vh] transition-transform -translate-x-full border-r border-gray-200 border-opacity-55 sm:translate-x-0 "
         aria-label="Sidebar"
       >
-        <div className="w-full flex flex-col  items-center justify-center  mb-4 border-opacity-45">
+        <div className="w-full  mt-[2.5rem] flex flex-col  items-center justify-center  mb-2 border-b border-gray-500/50">
           <AdminProfile />
         </div>
-        <div className="h-full z-0 px-1 pb-4  Hide-Scrollbar bg-gray-900 dark:bg-gray-900">
+        <div className=" z-0 px-1 pb-4 bg-gray-900 ">
           <p className="text-gray-400">Dashboard</p>
           <ul className="space-y-2 p-2 font-medium border-l border-gray-400">
             {dashboardBlog.map((component, index) => (
@@ -242,14 +284,14 @@ const AsideComponent = () => {
               </li>
             ))}
           </ul>
-          <p className="text-gray-400">Order</p>
+          <p className="text-gray-400">Booking</p>
           <ul className="space-y-2 p-2 font-medium border-l border-gray-400">
-            {orderBlog.map((component, index) => (
+            {bookingBlog.map((component, index) => (
               /* [Check exist menu or just button] */
               <li key={index}>
                 <button
                   onClick={(e) =>
-                    handleEvent(component.id, orderBlog, setOrderBlog)
+                    handleEvent(component.id, bookingBlog, setBookingBlog)
                   }
                   className="flex w-full h-[40px] border border-gray-700 relative items-center justify-start p-2  rounded-lg  group"
                 >
@@ -308,14 +350,14 @@ const AsideComponent = () => {
                         transition={{ duration: 0.3 }}
                         key={indexSub}
                         className={`h-7 ${
-                          location === item.to
+                          item.to.includes(location)
                             ? "!border  !border-gray-600 border-opacity-50 rounded"
                             : ""
                         }`}
                       >
                         <Button
                           component={Link}
-                          to={item.to}
+                          to={item.to[0]}
                           focusRipple
                           className={`custom-class h-full !bg-gray-900 w-full !font-thin !normal-case !my-0 !text-gray-300`}
                         >
@@ -328,15 +370,13 @@ const AsideComponent = () => {
               </li>
             ))}
           </ul>
-          <p className="text-gray-400">Product</p>
+          <p className="text-gray-400">Management</p>
           <ul className="space-y-2 p-2 font-medium border-l border-gray-400">
-            {product.map((component, index) => (
+            {Room.map((component, index) => (
               /* [Check exist menu or just button] */
               <li key={index}>
                 <button
-                  onClick={(e) =>
-                    handleEvent(component.id, product, setProductBlog)
-                  }
+                  onClick={(e) => handleEvent(component.id, Room, setRoom)}
                   className="flex w-full h-[40px] border border-gray-700 relative items-center justify-start p-2  rounded-lg  group"
                 >
                   {component.svg}
@@ -394,14 +434,14 @@ const AsideComponent = () => {
                         whileTap={{ scale: 0.95 }}
                         key={indexSub}
                         className={`h-7 ${
-                          location === item.to
+                          item.to.includes(location)
                             ? "!border  !border-gray-600 border-opacity-50 rounded"
                             : ""
                         }`}
                       >
                         <Button
                           component={Link}
-                          to={item.to}
+                          to={item.to[0]}
                           focusRipple
                           className={`custom-class h-full !bg-gray-900 w-full !font-thin !normal-case !my-0 !text-gray-300`}
                         >
@@ -414,15 +454,12 @@ const AsideComponent = () => {
               </li>
             ))}
           </ul>
-          <p className="text-gray-400">Category</p>
           <ul className="space-y-2 p-2 font-medium border-l border-gray-400">
-            {category.map((component, index) => (
+            {Hotel.map((component, index) => (
               /* [Check exist menu or just button] */
               <li key={index}>
                 <button
-                  onClick={(e) =>
-                    handleEvent(component.id, category, setCategory)
-                  }
+                  onClick={(e) => handleEvent(component.id, Hotel, setHotel)}
                   className="flex w-full h-[40px] border border-gray-700 relative items-center justify-start p-2  rounded-lg  group"
                 >
                   {component.svg}

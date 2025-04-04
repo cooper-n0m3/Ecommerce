@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
-import "../style/UserApp.css";
+import "../../../src/index.css";
 // import Button from
 import React, { useEffect, useRef, useState } from "react";
 import LayoutHeader from "./LayoutConponents/LayoutHeader";
@@ -15,7 +15,7 @@ const UserMainLayout = () => {
         {/* Header layout */}
         <LayoutHeader />
         {/* Body Layout */}
-        <LayoutBody/>
+        <LayoutBody />
         {/* Footer */}
       </Layout>
     </>
